@@ -15,11 +15,13 @@
 *        Control System
 *
 *    1.1 Item System
+*        Currency System
 *        Control Options
 *        General Options
 *
 *    ?.? Module System
 *        PV Playback
+*        UI Themes
 *
 ***/
 
