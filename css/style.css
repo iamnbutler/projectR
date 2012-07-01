@@ -12,6 +12,11 @@
 *
 ***/
 
+* {
+	padding: 0;
+	margin: 0;
+}
+
 .test ul {
 	width: 100%;
 	height: 100%;
@@ -19,12 +24,18 @@
 
 .test li {
 	font: 18px;
+	list-style: none;
 	padding: 50px 0px;
 	padding-left: 20px;
 	height: 18px;
 	width: 100%;
 }
 
-.test li:nth-child(2) {
+.test li:nth-child(even) {
 	background-color: #EFEFEF;
+}
+
+.test li a {
+	color: black;
+	text-decoration: none;
 }
