@@ -18,6 +18,50 @@ html, body, #song {
 
 /***
 *
+*  Song Styles [SONG]
+*
+***/
+
+#ui-song-header, #ui-song-footer {
+	background: white;
+	position: absolute;
+		top: 0;
+		left: 0;
+	width: 100%;
+	height: 8%;
+}
+
+#ui-song-footer {
+	top: 92%;
+}
+
+#song-title {
+	position: absolute;
+		top: 0;
+		left: 0;
+	width: 50%;
+	height: 100%;
+}
+
+#song-mode {
+	position: absolute;
+		top: 0;
+		left: 50%;
+	text-transform: uppercase;
+	width: 25%;
+	height: 100%;
+}
+
+#song-score {
+	position: absolute;
+		top: 0;
+		left: 75%;
+	width: 25%;
+	height: 100%;
+}
+
+/***
+*
 *  Note Styles [NOTE]
 *
 ***/
