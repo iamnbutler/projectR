@@ -90,12 +90,27 @@ html, body, #song {
 }
 
 .reg {
-	background-image: url(../img/ui-note-circle.png);
 	background-size: 40px 40px;
 }
 
 .reg-target {
 	
+}
+
+.ui-note-circle {
+	background-image: url(../img/ui-note-circle.png);
+}
+
+.ui-note-triangle {
+	background-image: url(../img/ui-note-triangle.png);
+}
+
+.ui-note-x {
+	background-image: url(../img/ui-note-x.png);
+}
+
+.ui-note-square {
+	background-image: url(../img/ui-note-square.png);
 }
 
 .ui-note-circle-target {

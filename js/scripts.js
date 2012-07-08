@@ -31,6 +31,17 @@ $(document).ready(function(){
 
 	/***
 	*
+	*  System Wide Variables [SWV]
+	*
+	***/
+
+	var docHeight = $(document).height();
+	var docWidth = $(document).width();
+
+	// These variables need a fuction to update them on window resize
+
+	/***
+	*
 	*  UI System [UI]
 	*
 	***/
@@ -232,13 +243,30 @@ $(document).ready(function(){
 					$('#note-' + noteId).children('.note-target').addClass('ui-note-square-target');
 				};
 			
-				// Position the note and animate to the target using the tempo multiplied by a constant as animation speed
+				// Position the note
 				$('#note-' + noteId).children('.note').css('left', noteStart[0] + '%');
 				$('#note-' + noteId).children('.note').css('top', noteStart[1] + '%');
+				
+				// Create a custom animation path using jQuery.path
+				var note_custom_path = {
+					start: { 
+					 	x: ((noteStart[0] / 100) * docWidth), 
+					 	y: ((noteStart[1] / 100) * docHeight), 
+					 	angle: 60,
+					 	length: 0.55
+					},  
+					end: { 
+					 	x: ((noteEnd[0] / 100) * docWidth), 
+					 	y: ((noteEnd[1] / 100) * docHeight), 
+					 	angle: 20, 
+					 	length: 0.35
+					}
+				}
+
+				// Animate the note along that path using the tempo as the speed variable
 				$('#note-' + noteId).children('.note').animate({
-					left: noteEnd[0] + '%',
-					top: noteEnd[1] + '%'
-				}, tempo * 15);
+					path : new $.path.bezier(note_custom_path)
+				}, tempo * 20);
 
 				// Positon the note target
 				$('#note-' + noteId).children('.note-target').css('left', noteEnd[0] + '%');
@@ -307,10 +335,10 @@ $(document).ready(function(){
 
 	// createNote variables: noteSpawnTime, noteType, noteButton, noteStart, noteEnd, tempo
 	createNote(1500,0,1,[10,0],[15,66],136);
-	createNote(3500,0,1,[25,100],[30,33],136);
-	createNote(5500,0,1,[40,0],[45,66],136);
-	createNote(7500,0,1,[50,100],[55,33],136);
-	createNote(9500,0,1,[65,0],[70,66],136);
+	createNote(3500,0,2,[25,100],[30,33],136);
+	createNote(5500,0,3,[40,0],[45,66],136);
+	createNote(7500,0,0,[50,100],[55,33],136);
+	createNote(9500,0,2,[65,0],[70,66],136);
 
 	/***
 	*
