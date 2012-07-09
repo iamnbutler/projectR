@@ -74,7 +74,9 @@ html, body, #song {
 	height: 100%;
 }
 
-.note {
+.note, .note-target {
+	background-image: url(../img/ui-note-sprite.png);
+	background-size: 320px 80px;
 	position: absolute;
 	width: 40px;
 	height: 40px;
@@ -82,40 +84,84 @@ html, body, #song {
 }
 
 .note-target {
-	background-color: #363636;
-	position: absolute;
-	width: 38px;
-	height: 38px;
 	z-index: 20;
 }
 
-.reg {
-	background-size: 40px 40px;
+.ui-timer-arrow {
+	background-image: url(../img/ui_timer_arrow.png);
+	background-size: 20px 52px;	
+	position: absolute;
+		top: -6px;
+		left: 10px;
+	width: 20px;
+	height: 52px;
 }
 
-.reg-target {
-	
+/* Regular notes */
+.ui-note-triangle {
+	background-position:0px 0px;
 }
 
 .ui-note-circle {
-	background-image: url(../img/ui-note-circle.png);
-}
-
-.ui-note-triangle {
-	background-image: url(../img/ui-note-triangle.png);
+	background-position:-40px 0px;
 }
 
 .ui-note-x {
-	background-image: url(../img/ui-note-x.png);
+	background-position:-80px 0px;
 }
 
 .ui-note-square {
-	background-image: url(../img/ui-note-square.png);
+	background-position:-120px 0px;
+}
+
+.ui-note-triangle-target {
+	background-position:0px -40px;
 }
 
 .ui-note-circle-target {
-	border: 1px white solid;
-	border-radius: 19px;
+	background-position:-40px -40px;
+}
+
+.ui-note-x-target {
+	background-position:-80px -40px;
+}
+
+.ui-note-square-target {
+	background-position:-120px -40px;
+}
+
+/* Arrow notes */
+
+.ui-note-triangle-arrow {
+	background-position:-160px 0px;
+}
+
+.ui-note-circle-arrow {
+	background-position:-200px 0px;
+}
+
+.ui-note-x-arrow {
+	background-position:-240px 0px;
+}
+
+.ui-note-square-arrow {
+	background-position:-280px 0px;
+}
+
+.ui-note-triangle-arrow-target {
+	background-position:-160px -40px;
+}
+
+.ui-note-circle-arrow-target {
+	background-position:-200px -40px;
+}
+
+.ui-note-x-arrow-target {
+	background-position:-240px -40px;
+}
+
+.ui-note-square-arrow-target {
+	background-position:-280px -40px;
 }
 
 /***

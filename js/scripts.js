@@ -105,8 +105,6 @@ $(document).ready(function(){
 
 	};
 
-	songInfo("Ai Kotoba", 1);
-
 	/***
 	*
 	*  Note System [NOTE]
@@ -196,11 +194,11 @@ $(document).ready(function(){
 			// Start "if hack", basically this if is here so I can target the children using $(this).children. Is there a better way to do this?
 			if ($('#note-container').is(':visible')) {
 
-				// Create the note semantics, assign a unique note ID using the noteId variable				
-				$('#note-container').append('<div id="note-' + noteId + '" class="note-wrap"><div class="note"></div><div class="note-target"></div></div>');
-
 				// Detect note type and create appropriate note and placeholder
 				if (noteType == 0) {
+					// Create the note semantics, assign a unique note ID using the noteId variable				
+					$('#note-container').append('<div id="note-' + noteId + '" class="note-wrap"><div class="note"></div><div class="note-target"></div></div>');
+
 					// Regular note
 					$('#note-' + noteId).children('.note').addClass('reg');
 
@@ -217,6 +215,9 @@ $(document).ready(function(){
 
 					// Spawn second note at end of trail
 				} else {
+					// Create the note semantics, assign a unique note ID using the noteId variable				
+					$('#note-container').append('<div id="note-' + noteId + '" class="note-wrap"><div class="note"></div><div class="note-target"></div></div>');
+
 					// Arrow note
 					$('#note-' + noteId).children('.note').addClass('arrow');
 
@@ -224,23 +225,44 @@ $(document).ready(function(){
 					$('#note-' + noteId).children('.note-target').addClass('arrow-target');
 				};
 
-				// Detect note button and assign background to button and target
-				if (noteButton == 0) {
-					// Triangle (up) note
-					$('#note-' + noteId).children('.note').addClass('ui-note-triangle');
-					$('#note-' + noteId).children('.note-target').addClass('ui-note-triangle-target');
-				} else if (noteButton == 1) {
-					// Circle (right) note
-					$('#note-' + noteId).children('.note').addClass('ui-note-circle');
-					$('#note-' + noteId).children('.note-target').addClass('ui-note-circle-target');
-				} else if (noteButton == 2) {
-					// X (down) note
-					$('#note-' + noteId).children('.note').addClass('ui-note-x');
-					$('#note-' + noteId).children('.note-target').addClass('ui-note-x-target');
-				} else {
-					// Square (left) note
-					$('#note-' + noteId).children('.note').addClass('ui-note-square');
-					$('#note-' + noteId).children('.note-target').addClass('ui-note-square-target');
+				if (noteType == 0 || noteType == 1) {
+					// Detect note button and assign background to button and target
+					if (noteButton == 0) {
+						// Triangle (up) note
+						$('#note-' + noteId).children('.note').addClass('ui-note-triangle');
+						$('#note-' + noteId).children('.note-target').addClass('ui-note-triangle-target');
+					} else if (noteButton == 1) {
+						// Circle (right) note
+						$('#note-' + noteId).children('.note').addClass('ui-note-circle');
+						$('#note-' + noteId).children('.note-target').addClass('ui-note-circle-target');
+					} else if (noteButton == 2) {
+						// X (down) note
+						$('#note-' + noteId).children('.note').addClass('ui-note-x');
+						$('#note-' + noteId).children('.note-target').addClass('ui-note-x-target');
+					} else {
+						// Square (left) note
+						$('#note-' + noteId).children('.note').addClass('ui-note-square');
+						$('#note-' + noteId).children('.note-target').addClass('ui-note-square-target');
+					}
+				} else if (noteType == 2) {
+					// Detect note button and assign background to button and target
+					if (noteButton == 0) {
+						// Triangle (up) arrow note
+						$('#note-' + noteId).children('.note').addClass('ui-note-triangle-arrow');
+						$('#note-' + noteId).children('.note-target').addClass('ui-note-triangle-arrow-target');
+					} else if (noteButton == 1) {
+						// Circle (right) arrow note
+						$('#note-' + noteId).children('.note').addClass('ui-note-circle-arrow');
+						$('#note-' + noteId).children('.note-target').addClass('ui-note-circle-arrow-target');
+					} else if (noteButton == 2) {
+						// X (down) arrow note
+						$('#note-' + noteId).children('.note').addClass('ui-note-x-arrow');
+						$('#note-' + noteId).children('.note-target').addClass('ui-note-x-arrow-target');
+					} else {
+						// Square (left) arrow note
+						$('#note-' + noteId).children('.note').addClass('ui-note-square-arrow');
+						$('#note-' + noteId).children('.note-target').addClass('ui-note-square-arrow-target');
+					}
 				};
 			
 				// Position the note
@@ -266,7 +288,7 @@ $(document).ready(function(){
 				// Animate the note along that path using the tempo as the speed variable
 				$('#note-' + noteId).children('.note').animate({
 					path : new $.path.bezier(note_custom_path)
-				}, tempo * 20);
+				}, tempo * 15);
 
 				// Positon the note target
 				$('#note-' + noteId).children('.note-target').css('left', noteEnd[0] + '%');
@@ -274,6 +296,10 @@ $(document).ready(function(){
 				
 				// Clock hand animation
 				// When the note is pressed while the clock hand is at the top of the element, COOL is awarded
+
+				// Add the timer arrow and animate it
+				$('#note-' + noteId).children('.note-target').append('<div class="ui-timer-arrow"></div>');
+				$('#note-' + noteId).children('.ui-timer-arrow').animate({rotate:90},{duration:1000})
 
 				/* Log all variables for testing 
 				console.log('noteSpawnTime: ' + noteSpawnTime);
@@ -298,8 +324,10 @@ $(document).ready(function(){
 						console.log('tempo: ' + tempo); */
 						console.log('noteAcc: ' + noteAccuracy);
 
-						// Call the destroy function just before the note ID changes
-						$('#note-' + (noteId - 1)).remove();
+						if (noteAccuracy < 1.2 || noteAccuracy > 0.8) {
+							// Call the destroy function just before the note ID changes
+							$('#note-' + (noteId - 1)).remove();
+						}
 
 						return false; 
 					});
@@ -333,12 +361,60 @@ $(document).ready(function(){
 		}, (noteSpawnTime));
 	};
 
+	songInfo("Ai Kotoba", 2);
+
 	// createNote variables: noteSpawnTime, noteType, noteButton, noteStart, noteEnd, tempo
-	createNote(1500,0,1,[10,0],[15,66],136);
-	createNote(3500,0,2,[25,100],[30,33],136);
-	createNote(5500,0,3,[40,0],[45,66],136);
-	createNote(7500,0,0,[50,100],[55,33],136);
-	createNote(9500,0,2,[65,0],[70,66],136);
+	
+	createNote(1000,0,1,[10,0],[10,50],136);
+	createNote(1500,0,1,[15,0],[15,50],136);
+	createNote(2200,0,1,[25,0],[25,57],136);
+	createNote(2900,0,1,[35,0],[35,66],136);
+	createNote(3600,2,1,[45,0],[45,73],136);
+
+	createNote(4100,0,2,[50,0],[50,73],136);
+	createNote(4800,0,2,[60,0],[60,66],136);
+	createNote(5500,0,2,[70,0],[70,57],136);
+	createNote(6200,2,2,[80,0],[80,50],136);
+
+	/* createNote(1500,0,1,[15,0],[15,66],136);
+	createNote(2000,0,1,[20,100],[20,66],136);
+	createNote(2500,0,1,[25,0],[25,66],136);
+	createNote(3000,0,1,[30,100],[30,66],136);
+
+	createNote(4500,0,1,[40,0],[40,66],136);
+	createNote(5000,0,1,[45,100],[45,66],136);
+	createNote(5500,0,1,[50,0],[50,66],136);
+	createNote(6000,0,1,[55,100],[55,66],136);
+
+	createNote(7500,0,2,[30,0],[30,33],136);
+	createNote(8000,0,2,[35,100],[35,33],136);
+	createNote(8500,0,2,[40,0],[40,33],136);
+	createNote(9000,0,2,[45,100],[45,33],136);
+
+	createNote(10500,0,2,[55,0],[55,33],136);
+	createNote(11000,0,2,[60,100],[60,33],136);
+	createNote(11500,0,2,[65,0],[65,33],136);
+	createNote(12000,0,2,[70,100],[70,33],136);
+
+	createNote(13500,0,3,[10,0],[10,50],136);
+	createNote(14000,0,3,[15,100],[15,50],136);
+	createNote(14500,0,3,[20,0],[20,50],136);
+	createNote(15000,0,3,[25,100],[25,50],136);
+
+	createNote(16500,0,3,[35,0],[35,50],136);
+	createNote(17000,0,3,[40,100],[40,50],136);
+	createNote(17500,0,3,[45,0],[45,50],136);
+	createNote(18000,0,3,[50,100],[50,50],136);
+
+	createNote(19500,0,0,[45,0],[45,17],136);
+	createNote(20000,0,0,[50,100],[50,17],136);
+	createNote(20500,0,0,[55,0],[55,17],136);
+	createNote(21000,0,0,[60,100],[60,17],136);
+
+	createNote(22500,0,0,[70,0],[70,17],136);
+	createNote(23000,0,0,[75,100],[75,17],136);
+	createNote(23500,0,0,[80,0],[80,17],136);
+	createNote(24000,0,0,[85,100],[85,17],136); */
 
 	/***
 	*
@@ -363,6 +439,8 @@ $(document).ready(function(){
 	var notesPassed = 0;
 	var notePercentage = 0;
 
+	var scoreClear = 0;
+
 	// Calculate the percentage of notes hit, and assign grade
 	function calculateScore(notesPassed, notesTotal) {
 		// Calculate the percentage of notes hit. This value will always be rounded down to the nearest percent.
@@ -370,15 +448,20 @@ $(document).ready(function(){
 
 		if (notePercentage >= 85) {
 			grade = 1;
+			scoreClear = 1;
 		} else if (notePercentage >= 95) {
 			grade = 2;
+			scoreClear = 1;
 		} else if (notePercentage >= 97) {
 			grade = 3;
+			scoreClear = 1;
 		} else if (notePercentage = 100) {
 			grade = 4;
+			scoreClear = 1;
 		} else {
-			// Song failed, assign MISSxTAKE grade
+			// Song failed, assign FAIL grade
 			grade = 0;
+			scoreClear = 0;
 		}
 
 		// Calculate total score
@@ -395,5 +478,7 @@ $(document).ready(function(){
 	*  Currency System [CURR]
 	*
 	***/
+
+	
 
 });

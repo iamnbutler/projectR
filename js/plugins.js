@@ -196,3 +196,23 @@
       fx.elem.style[i] = css[i];
   }
 })(jQuery);
+
+// jQuery CSS3 Rotate (and animate Rotation) - http://javascriptisawesome.blogspot.ca/2011/09/jquery-css-rotate-and-animate-rotation.html
+
+(function($){
+ var _e = document.createElement("canvas").width
+ $.fn.cssrotate = function(d) {  
+    return this.css({
+  '-moz-transform':'rotate('+d+'deg)',
+  '-webkit-transform':'rotate('+d+'deg)',
+  '-o-transform':'rotate('+d+'deg)',
+  '-ms-transform':'rotate('+d+'deg)'
+ }).prop("rotate", _e ? d : null)
+ }; 
+ var $_fx_step_default = $.fx.step._default;
+ $.fx.step._default = function (fx) {
+ if(fx.prop != "rotate")return $_fx_step_default(fx);
+ if(typeof fx.elem.rotate == "undefined")fx.start = fx.elem.rotate = 0;
+ $(fx.elem).cssrotate(fx.now)
+ }; 
+})(jQuery);
