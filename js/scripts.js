@@ -299,16 +299,7 @@ $(document).ready(function(){
 
 				// Add the timer arrow and animate it
 				$('#note-' + noteId).children('.note-target').append('<div class="ui-timer-arrow"></div>');
-				$('#note-' + noteId).children('.ui-timer-arrow').animate({rotate:90},{duration:1000})
-
-				/* Log all variables for testing 
-				console.log('noteSpawnTime: ' + noteSpawnTime);
-				console.log('noteType: ' + noteType);
-				console.log('noteButton: ' + noteButton);
-				console.log('noteStart: ' + noteStart);
-				console.log('noteEnd: ' + noteEnd);
-				console.log('tempo: ' + tempo);
-				console.log('noteId: ' + noteId); */
+				$('.ui-timer-arrow').animate({rotate:360},{duration:(tempo * 15)})
 
 				// Controls
 
@@ -365,7 +356,7 @@ $(document).ready(function(){
 
 	// createNote variables: noteSpawnTime, noteType, noteButton, noteStart, noteEnd, tempo
 	
-	createNote(1000,0,1,[10,0],[10,50],136);
+	/* createNote(1000,0,1,[10,0],[10,50],136);
 	createNote(1500,0,1,[15,0],[15,50],136);
 	createNote(2200,0,1,[25,0],[25,57],136);
 	createNote(2900,0,1,[35,0],[35,66],136);
@@ -374,9 +365,9 @@ $(document).ready(function(){
 	createNote(4100,0,2,[50,0],[50,73],136);
 	createNote(4800,0,2,[60,0],[60,66],136);
 	createNote(5500,0,2,[70,0],[70,57],136);
-	createNote(6200,2,2,[80,0],[80,50],136);
+	createNote(6200,2,2,[80,0],[80,50],136); */
 
-	/* createNote(1500,0,1,[15,0],[15,66],136);
+	createNote(1500,0,1,[15,0],[15,66],136);
 	createNote(2000,0,1,[20,100],[20,66],136);
 	createNote(2500,0,1,[25,0],[25,66],136);
 	createNote(3000,0,1,[30,100],[30,66],136);
@@ -414,7 +405,7 @@ $(document).ready(function(){
 	createNote(22500,0,0,[70,0],[70,17],136);
 	createNote(23000,0,0,[75,100],[75,17],136);
 	createNote(23500,0,0,[80,0],[80,17],136);
-	createNote(24000,0,0,[85,100],[85,17],136); */
+	createNote(24000,0,0,[85,100],[85,17],136);
 
 	/***
 	*
