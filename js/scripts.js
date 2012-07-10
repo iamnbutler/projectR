@@ -288,7 +288,7 @@ $(document).ready(function(){
 				// Animate the note along that path using the tempo as the speed variable
 				$('#note-' + noteId).children('.note').animate({
 					path : new $.path.bezier(note_custom_path)
-				}, tempo * 15);
+				}, tempo * 12);
 
 				// Positon the note target
 				$('#note-' + noteId).children('.note-target').css('left', noteEnd[0] + '%');
@@ -299,7 +299,7 @@ $(document).ready(function(){
 
 				// Add the timer arrow and animate it
 				$('#note-' + noteId).children('.note-target').append('<div class="ui-timer-arrow"></div>');
-				$('.ui-timer-arrow').animate({rotate:360},{duration:(tempo * 15)})
+				$('.ui-timer-arrow').animate({rotate:360},{duration:(tempo * 12)})
 
 				// Controls
 
@@ -309,7 +309,7 @@ $(document).ready(function(){
 				function songControls() {
 					$(document).bind('keydown', 'up',function (){
 						notePressTime = counter;
-						noteAccuracy = notePressTime / (noteSpawnTime + (tempo * 15));
+						noteAccuracy = notePressTime / (noteSpawnTime + (tempo * 12));
 						/* console.log('notePressTime: ' + notePressTime);
 						console.log('noteSpawnTime: ' + noteSpawnTime);
 						console.log('tempo: ' + tempo); */
@@ -352,22 +352,7 @@ $(document).ready(function(){
 		}, (noteSpawnTime));
 	};
 
-	songInfo("Ai Kotoba", 2);
-
-	// createNote variables: noteSpawnTime, noteType, noteButton, noteStart, noteEnd, tempo
-	
-	/* createNote(1000,0,1,[10,0],[10,50],136);
-	createNote(1500,0,1,[15,0],[15,50],136);
-	createNote(2200,0,1,[25,0],[25,57],136);
-	createNote(2900,0,1,[35,0],[35,66],136);
-	createNote(3600,2,1,[45,0],[45,73],136);
-
-	createNote(4100,0,2,[50,0],[50,73],136);
-	createNote(4800,0,2,[60,0],[60,66],136);
-	createNote(5500,0,2,[70,0],[70,57],136);
-	createNote(6200,2,2,[80,0],[80,50],136); */
-
-	createNote(1500,0,1,[15,0],[15,66],136);
+	/* createNote(1500,0,1,[15,0],[15,66],136);
 	createNote(2000,0,1,[20,100],[20,66],136);
 	createNote(2500,0,1,[25,0],[25,66],136);
 	createNote(3000,0,1,[30,100],[30,66],136);
@@ -405,7 +390,7 @@ $(document).ready(function(){
 	createNote(22500,0,0,[70,0],[70,17],136);
 	createNote(23000,0,0,[75,100],[75,17],136);
 	createNote(23500,0,0,[80,0],[80,17],136);
-	createNote(24000,0,0,[85,100],[85,17],136);
+	createNote(24000,0,0,[85,100],[85,17],136); */
 
 	/***
 	*
@@ -470,6 +455,35 @@ $(document).ready(function(){
 	*
 	***/
 
+	/***
+	*
+	*  Song Begin Screen [SBEG]
+	*
+	***/
+
+	// Hit enter to begin song
+	$(document).bind('keydown', 'return',function (){
+
+		$('#pre-song').hide();
+		$('#song-pv').get(0).play()
+
+		songInfo("Strobo Nights", 1);
+		
+		// createNote variables: noteSpawnTime, noteType, noteButton, noteStart, noteEnd, tempo
 	
+		createNote(13800,0,1,[60,110],[85,35],125);
+		createNote(14700,0,1,[60,110],[79,26],125);
+		createNote(16300,0,1,[60,110],[69,15],125);
+		createNote(16800,0,1,[60,110],[65,11],125);
+
+		createNote(17800,0,2,[40,-10],[15,65],125);
+		createNote(18700,0,2,[40,-10],[21,74],125);
+		createNote(20300,0,2,[40,-10],[31,85],125);
+		createNote(20800,0,2,[40,-10],[35,89],125);
+
+
+		return false; 
+	});
+
 
 });
